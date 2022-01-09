@@ -1,0 +1,40 @@
+<div [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input
+      matInput
+      placeholder="Course title"
+      formControlName="title"
+      required
+      #title
+    />
+    <mat-hint align="end">{{ title.value.length }} /30</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="releasedAt" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Choose a Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option
+        *ngFor="let category of courseCategories$ | async"
+        [value]="category.code"
+        >{{ category.description }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <mat-checkbox color="primary" formControlName="downloadAllowed">
+    Downloads allowed</mat-checkbox
+  >
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      placeholder="Description"
+      formControlName="longDescription"
+    ></textarea>
+  </mat-form-field>
+</div>
